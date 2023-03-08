@@ -1,10 +1,63 @@
-const openNav = document.querySelector("fa-bars");
-const closeNav = document.querySelector("fa-xmark");
-const navMenu = document.querySelector("nav-links-container");
+(() => {
+  const openNav = document.querySelector(".open-menu"),
+    closeNav = document.querySelector(".close-menu"),
+    navMenu = document.querySelector(".nav-links-container"),
+    background = document.querySelector(".background"),
+    mediaSize = 992;
 
-openNav.addEventListener("click", toggle);
-closeNav.addEventListener("click", toggle);
+  openNav.addEventListener("click", toggleMenu);
+  closeNav.addEventListener("click", toggleMenu);
+  background.addEventListener("click", toggleMenu);
 
-function toggle() {
-  navMenu.classList.toggle("open");
-}
+  function toggleMenu() {
+    navMenu.classList.toggle("open");
+    background.classList.toggle("active");
+    document.body.classList.toggle("hidden-scrolling");
+  }
+
+  navMenu.addEventListener("click", (event) => {
+    if (
+      event.target.hasAttribute("data-toggle") &&
+      window.innerWidth <= mediaSize
+    ) {
+      event.preventDefault();
+      const dropdownMenuBranch = event.target.parentElement;
+
+      if (dropdownMenuBranch.classList.contains("active")) {
+        collapseDropdownMenu();
+      } else {
+        if (navMenu.querySelector(".dropdown-menu-branch.active")) {
+          collapseDropdownMenu();
+        }
+
+        dropdownMenuBranch.classList.add("active");
+        const dropdownMenu = dropdownMenuBranch.querySelector(".dropdown-menu");
+        dropdownMenu.style.maxHeight = dropdownMenu.scrollHeight + "px";
+      }
+    }
+  });
+
+  function collapseDropdownMenu() {
+    navMenu
+      .querySelector(".dropdown-menu-branch.active .dropdown-menu")
+      .removeAttribute("style");
+    navMenu
+      .querySelector(".dropdown-menu-branch.active")
+      .classList.remove("active");
+  }
+
+  function resizeFix() {
+    if (navMenu.classList.contains("open")) {
+      toggleNav();
+    }
+    if (navMenu.querySelector(".dropdown-menu-branch.active")) {
+      collapseDropdownMenu();
+    }
+  }
+
+  window.addEventListener("resize", function () {
+    if (this.innerWidth > mediaSize) {
+      resizeFix();
+    }
+  });
+})();

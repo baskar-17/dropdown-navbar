@@ -7,6 +7,12 @@
   scroll-behavior: smooth;
   font-family: "Rubik", sans-serif;
 }
+body {
+  width: 100vw;
+}
+body.hidden-scrolling {
+  overflow-y: hidden;
+}
 
 .nav-container {
   width: 100%;
@@ -18,7 +24,7 @@
 }
 
 .nav-logo {
-  width: 150px;
+  width: 120px;
   padding: 1rem 0;
 }
 
@@ -61,6 +67,7 @@
   width: 16px;
   margin-left: 8px;
   transition: 0.3s ease;
+  pointer-events: none;
 }
 
 .nav-link-item:hover > a > .fa-chevron-down {
@@ -70,7 +77,7 @@
 .nav-links > .nav-link-item > .dropdown-menu {
   width: 200px;
   position: absolute;
-  top: 100%;
+  top: 80%;
   left: -16px;
   border-radius: 10px;
   overflow: hidden;
@@ -110,25 +117,29 @@
   padding: 2rem 4rem;
   width: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  text-align: center;
 }
 
 .hero-content {
-  width: 45%;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
 }
 
 .hero-content h1 {
   font-size: 3rem;
   line-height: 3.5rem;
-  margin-bottom: 16px;
+  margin-bottom: 2rem;
 }
 
 .hero-content p {
   font-size: 16px;
   line-height: 22px;
-  margin-bottom: 24px;
-  width: 80%;
+  margin-bottom: 2rem;
 }
 
 .like {
@@ -151,6 +162,8 @@ button {
   align-items: center;
   display: flex;
   gap: 8px;
+  width: fit-content;
+  margin: auto;
 }
 
 button:hover {
@@ -160,23 +173,45 @@ button:hover {
 }
 
 .hero-image {
-  width: 45%;
+  width: 50%;
+  margin-bottom: 2rem;
 }
 
 .hero-image img {
   padding: 1rem;
-  width: 100%;
+  width: 80%;
   object-fit: cover;
 }
 
-.fa-bars {
+.nav-container .background {
+  position: fixed;
+  z-index: 999;
+  background-color: #00000050;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  transition: 0.3s ease-in;
+}
+
+.nav-container .background.active {
+  visibility: visible;
+  opacity: 1;
+  transition: 0.3s ease-out;
+}
+
+.nav-container .open-menu {
+  display: none;
   font-size: 24px;
   color: #2d57d9;
 }
 
-.fa-xmark {
+.nav-container .close-menu {
   font-size: 24px;
   color: #fff;
+  display: none;
 }
 
 @media (max-width: 992px) {
@@ -185,7 +220,7 @@ button:hover {
   }
 
   .nav-container .nav-links-container {
-    position: fixed;
+    position: absolute;
     right: -280px;
     visibility: hidden;
     width: 280px;
@@ -193,13 +228,14 @@ button:hover {
     top: 0;
     overflow-y: auto;
     background-color: #2d57d9;
-    z-index: 999;
+    z-index: 1000;
     padding: 15px;
-    transition: all 0.5s ease;
+    transition: all 0.3s ease-in;
   }
 
   .nav-container .nav-links-container.open {
     visibility: visible;
+    transition: all 0.3s ease-out;
     right: 0;
   }
 
@@ -214,6 +250,19 @@ button:hover {
     border-bottom: 1px solid #ffffff16;
     display: flex;
     justify-content: space-between;
+  }
+
+  .nav-link-item:hover > a > .fa-chevron-down {
+    transform: rotate(0);
+  }
+
+  .nav-container
+    > .nav-links-container
+    > .nav-links
+    > .dropdown-menu-branch.active
+    > a
+    .fa-chevron-down {
+    transform: rotate(-180deg);
   }
 
   .nav-links > .nav-link-item > .dropdown-menu {
@@ -250,8 +299,91 @@ button:hover {
     padding: 1.5rem 0;
   }
 
-  .fa-xmark {
+  .nav-container .open-menu {
+    cursor: pointer;
+    display: block;
+  }
+
+  .nav-container .close-menu {
     padding: 16px;
     cursor: pointer;
+    display: block;
+  }
+
+  .hero-content {
+    width: 100%;
+    margin: 2rem;
+  }
+
+  .hero-content h1 {
+    font-size: 2.5rem;
+    line-height: 3rem;
+  }
+
+  .hero-content p {
+    font-size: 16px;
+    line-height: 22px;
+    margin-bottom: 24px;
+    width: 100%;
+  }
+
+  .hero-image {
+    width: 50%;
+    margin-bottom: 1rem;
+  }
+
+  .hero-image img {
+    padding: 1rem;
+    width: 100%;
+    object-fit: cover;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-container {
+    padding: 2rem;
+  }
+  .hero-content {
+    margin: 1rem;
+  }
+
+  .hero-content h1 {
+    font-size: 2rem;
+    line-height: 2.5rem;
+  }
+
+  .hero-content p {
+    margin-bottom: 16px;
+  }
+  .hero-image img {
+    padding: 0;
+  }
+}
+
+@media (max-width: 576px) {
+  .hero-container {
+    padding: 1rem;
+  }
+
+  .hero-content h1 {
+    font-size: 2.5rem;
+    line-height: 3rem;
+  }
+
+  .hero-content p {
+    font-size: 16px;
+    line-height: 22px;
+    margin-bottom: 16px;
+    width: 100%;
+  }
+
+  .hero-image {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .hero-image img {
+    width: 75%;
+    object-fit: cover;
   }
 }

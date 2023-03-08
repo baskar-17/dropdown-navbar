@@ -18,11 +18,16 @@
           <img src="images/devlab_svg.svg" alt="" />
         </a>
       </div>
-      <div class="nav-links-container open">
-        <i class="fa-solid fa-xmark"></i>
+
+      <i class="fa-solid fa-bars open-menu"></i>
+      <div class="background"></div>
+      <div class="nav-links-container">
+        <i class="fa-solid fa-xmark close-menu"></i>
         <ul class="nav-links">
-          <li class="nav-link-item">
-            <a href="#">Home<i class="fa-solid fa-chevron-down"></i></a>
+          <li class="nav-link-item dropdown-menu-branch">
+            <a href="#" data-toggle="dropdown-menu"
+              >Home<i class="fa-solid fa-chevron-down"></i
+            ></a>
             <ul class="dropdown-menu">
               <li class="dropdown-menu-item">
                 <a href="#">Sub menu 1</a>
@@ -41,8 +46,10 @@
           <li class="nav-link-item">
             <a href="#">Products</a>
           </li>
-          <li class="nav-link-item">
-            <a href="#">Blog<i class="fa-solid fa-chevron-down"></i></a>
+          <li class="nav-link-item dropdown-menu-branch">
+            <a href="#" data-toggle="dropdown-menu"
+              >Blog<i class="fa-solid fa-chevron-down"></i
+            ></a>
             <ul class="dropdown-menu">
               <li class="dropdown-menu-item">
                 <a href="#">Sub menu 1</a>
@@ -63,11 +70,12 @@
           </li>
         </ul>
       </div>
-
-      <i class="fa-solid fa-bars"></i>
     </div>
 
     <div class="hero-container">
+      <div class="hero-image">
+        <img src="images/devlab-hero-img.svg" />
+      </div>
       <div class="hero-content">
         <h1>
           Hope this video is useful: Don't forget to
@@ -80,9 +88,6 @@
           the like button and subscribing to our channel.
         </p>
         <button><i class="fa-brands fa-youtube"></i>Subscribe</button>
-      </div>
-      <div class="hero-image">
-        <img src="images/devlab-hero-img.svg" />
       </div>
     </div>
     <script src="app.js"></script>
